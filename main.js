@@ -49,6 +49,11 @@ while (count <= gridWidth * gridWidth) {
 // Add queries for all your squares, palette colors, and brush here.
 // (Note the singular or plural used in that sentence!)
 
+let paletteColors = document.querySelectorAll(".palette .palette-color");
+let brush = document.querySelector('.current-brush');
+
+let canvas = document.querySelectorAll('.canvas div');
+
 
 
 /****************************
@@ -60,6 +65,44 @@ while (count <= gridWidth * gridWidth) {
 // empty at first, though a console.log just to know they're being
 // run as event listeners (after the next step is set up) isn't a
 // bad idea for testing purposes.
+
+let mouseDown = false;
+
+for(let i = 0; i < paletteColors.length; i++) {
+  paletteColors[i].addEventListener('click', function(){
+    console.log(paletteColors[i]);
+    brush.classList.replace(brush.classList[1], paletteColors[i].classList[1]);
+  })
+}
+
+brush.addEventListener('click', function(){
+console.log(brush)
+})
+
+for(let i = 0; i < canvas.length; i++) {
+  // canvas[i].addEventListener('click', function(){
+  //   canvas[i].classList.remove(canvas[i].classList[1])
+  //   canvas[i].classList.add(brush.classList[1])
+  // })
+
+canvas[i].addEventListener('mouseover', function(){
+  if (mouseDown === true) {
+    canvas[i].classList.replace(canvas[i].classList[1], brush.classList[1])
+  }
+})
+
+}
+
+
+document.addEventListener('mousedown', function() {
+mouseDown = true;
+console.log(`mousedown: ${mouseDown}`)
+})
+
+document.addEventListener('mouseup', function() {
+  mouseDown = false;
+  console.log(`mousedown: ${mouseDown}`)
+})
 
 
 
